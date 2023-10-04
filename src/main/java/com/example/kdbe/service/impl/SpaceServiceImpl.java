@@ -1,7 +1,7 @@
-package service.impl;
+package com.example.kdbe.service.impl;
 
+import com.example.kdbe.service.SpaceService;
 import org.springframework.stereotype.Service;
-import service.SpaceService;
 
 @Service
 public class SpaceServiceImpl implements SpaceService {

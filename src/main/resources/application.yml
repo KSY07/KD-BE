@@ -1,0 +1,7 @@
+server:
+  port: 9041
+logging:
+  level:
+    com.example.kdebe: debug
+
+

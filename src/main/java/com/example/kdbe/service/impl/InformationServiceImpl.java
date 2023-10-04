@@ -1,8 +1,8 @@
-package service.impl;
+package com.example.kdbe.service.impl;
 
 
+import com.example.kdbe.service.InformationService;
 import org.springframework.stereotype.Service;
-import service.InformationService;
 
 @Service
 public class InformationServiceImpl implements InformationService {
