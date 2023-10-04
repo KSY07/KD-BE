@@ -5,3 +5,5 @@ logging:
     com.example.kdebe: debug
 
 
+auth:
+  secretKey: "kdbe"
