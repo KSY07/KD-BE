@@ -28,7 +28,12 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: Make Gradle wrapper script executable
+      run: |
+          chmod +x $GITHUB_WORKSPACE/gradlew
+      working-directory: $GITHUB_WORKSPACE
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-      with:
-        arguments: build
+      run: |
+          $GITHUB_WORKSPACE/gradlew build
+      working-directory: $GITHUB_WORKSPACE
+
