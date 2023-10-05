@@ -1,6 +1,3 @@
-server:
-  port: 9041
-
 app:
   name: kdbe
   version: 1.0.0
