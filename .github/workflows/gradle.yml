@@ -55,8 +55,8 @@ jobs:
         port: 22
         script: |
           sudo docker pull kimkagyun/kdbe:latest
-          sudo docker stop kimkagyun
-          sudo docker rm kimkagyun
+          sudo docker stop kdbe
+          sudo docker rm kdbe
           sudo docker run -d -p 8080:8080 --name kdbe kimkagyun/kdbe:latest
 
 
