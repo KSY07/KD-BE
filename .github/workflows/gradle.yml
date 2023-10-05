@@ -40,10 +40,12 @@ jobs:
         docker login -u ${{ secrets.SECRET_ID }} -p ${{ secrets.SECRET_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t kimkagyun/kdbe:latest
+      run:  | 
+        docker build -t kimkagyun/kdbe:latest
 
     - name: Push Docker Image
-      run: docker push kimkagyun/kdbe:latest
+      run: | 
+        docker push kimkagyun/kdbe:latest
 
     - name: SSH into EC2 and Deploy
       uses: appleboy/ssh-action@master
