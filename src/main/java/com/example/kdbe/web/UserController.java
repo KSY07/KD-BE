@@ -16,6 +16,6 @@ public class UserController {
     @GetMapping("/test")
     public String test(){
         log.debug("pull request test test");
-        return "hello";
+        return "hello test";
     }
 }
