@@ -51,7 +51,7 @@ jobs:
       run: docker push -t kimkagyun/kdbe:latest
 
     - name: SSH into EC2 and Deploy
-      users: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ubuntu
