@@ -57,6 +57,6 @@ jobs:
           sudo docker pull kimkagyun/kdbe:latest
           sudo docker stop kdbe
           sudo docker rm kdbe
-          sudo docker run -d -p 8080:8080 --name kdbe kimkagyun/kdbe:latest
+          sudo docker run -d -p 80:8080 --name kdbe kimkagyun/kdbe:latest
 
 
