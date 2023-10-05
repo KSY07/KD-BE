@@ -1,4 +1,4 @@
 FROM openjdk:17-ea-11-jdk-slim
-VOLUME /tmp
-COPY target/kdbe-0.0.1-SNAPSHOT.jar kdbe.jar
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} kdbe.jar
 ENTRYPOINT ["java", "-jar", "kdbe.jar"]
