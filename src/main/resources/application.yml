@@ -4,6 +4,20 @@ logging:
   level:
     com.example.kdebe: debug
 
+spring:
+  data:
+    mongodb:
+      uri: mongodb://ksy2008w:rlatpdud13795@docdb-2023-10-04-06-56-29.cluster-c0yxo9fizkk3.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://toy-db.c0yxo9fizkk3.ap-northeast-2.rds.amazonaws.com:3306/kdproject
+    username: admin
+    password: rlatpdud13795
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+
 
 auth:
   secretKey: "kdbe"
