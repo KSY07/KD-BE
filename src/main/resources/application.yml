@@ -7,8 +7,7 @@ app:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://toy-db.c0yxo9fizkk3.ap-northeast-2.rds.amazonaws.com:3306/kdproject
-
+    url: jdbc:mariadb://toy-db.c0yxo9fizkk3.ap-northeast-2.rds.amazonaws.com:3306/kdproject?useUnicode=true&characterEncoding=UTF-8
     username: admin
     password: rlatpdud13795
   jpa:
@@ -16,11 +15,17 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MariaDBDialect
     show-sql: true
+    format-sql: true
+
+
   data:
     mongodb:
       host: 54.180.24.185
       port: 27017
       database: my-service
+  sql:
+    init:
+      encoding: UTF-8
 
 logging:
   level:
