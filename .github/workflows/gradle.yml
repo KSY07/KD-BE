@@ -31,7 +31,32 @@ jobs:
     - name: Make Gradle wrapper script executable
       run: |
           chmod +x ./gradlew
-     
+
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Login to Docker Hub
+      run: echo ${{ secrets.SECRET_PASSWORD }} | docker login -u ${{ secrets.SECRET_ID }} --password-stdin
+
+    - name: Set up Docker Buildx
+      run: docker buildx create --use
+
+    - name: Build and Push Docker Image with Buildx
+      run: |
+        docker buildx build -t kimkagyun/kdbe:latest .
+        docker buildx build --push -t kimkagyun/kdbe:latest .
+
+    - name: SSH into EC2 and Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ubuntu
+        key: ${{ secrets.SECRET_PEMKEY }}
+        port: 22
+        script: |
+          sudo docker pull kimkagyun/kdbe:latest
+          sudo docker stop kdbe
+          sudo docker rm kdbe
+          sudo docker run -d -p 80:8080 --name kdbe kimkagyun/kdbe:latest
+
 

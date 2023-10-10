@@ -1,23 +1,32 @@
-server:
-  port: 9041
-logging:
-  level:
-    com.example.kdebe: debug
+app:
+  name: kdbe
+  version: 1.0.0
 
+
+## RDB Property (AWS RDS), MongoDB
 spring:
-  data:
-    mongodb:
-      uri: mongodb://ksy2008w:rlatpdud13795@docdb-2023-10-04-06-56-29.cluster-c0yxo9fizkk3.ap-northeast-2.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://toy-db.c0yxo9fizkk3.ap-northeast-2.rds.amazonaws.com:3306/kdproject
+    url: jdbc:mariadb://toy-db.c0yxo9fizkk3.ap-northeast-2.rds.amazonaws.com:3306/kdproject?useUnicode=true&characterEncoding=UTF-8
     username: admin
     password: rlatpdud13795
   jpa:
     hibernate:
-      ddl-auto: create
-    database-platform: org.hibernate.dialect.MariaDB103Dialect
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
+    format-sql: true
 
 
-auth:
-  secretKey: "kdbe"
+  data:
+    mongodb:
+      host: 54.180.24.185
+      port: 27017
+      database: my-service
+  sql:
+    init:
+      encoding: UTF-8
+
+logging:
+  level:
+    com.example.kdbe: debug
