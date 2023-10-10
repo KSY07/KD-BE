@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Permission;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table (name = "users")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "userId", "name", "email"})
@@ -27,12 +30,17 @@ public class User extends BaseEntity {
     private String email;
 
     @OneToOne(fetch = FetchType.LAZY,  orphanRemoval = true)
-    @JoinColumn(name="id")
+    @JoinColumn(name="credential_id")
     private Credential credential;
 
+
+    // userRole 테이블 추가 변경 필요
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name="id")
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<UserSpace> userSpaces = new ArrayList<>();
 
     @Builder
     public User(String userId, String name, String email, Credential credential, Role role){

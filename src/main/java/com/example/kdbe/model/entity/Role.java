@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,13 +30,14 @@ public class Role extends BaseEntity{
     @OneToOne(mappedBy = "role")
     private User user;
 
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private List<RoleSpace> roleSpaces = new ArrayList<>();
+
     @Builder
     public Role(String roleId, String type){
         this.roleId = roleId;
         this.type = type;
     }
-
-
 
     public void changeUser(User user){
         this.user = user;
