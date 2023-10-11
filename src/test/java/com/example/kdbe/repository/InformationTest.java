@@ -1,12 +1,10 @@
-package com.example.kdbe.Repository;
+package com.example.kdbe.repository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
-class UserSpaceRepositoryTest {
-
+class InformationTest {
 
 }
