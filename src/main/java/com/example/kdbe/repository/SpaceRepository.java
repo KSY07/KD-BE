@@ -1,4 +1,4 @@
-package com.example.kdbe.Repository;
+package com.example.kdbe.repository;
 
 import com.example.kdbe.model.entity.Space;
 import org.springframework.data.jpa.repository.JpaRepository;
