@@ -30,3 +30,8 @@ spring:
 logging:
   level:
     com.example.kdbe: debug
+
+auth:
+  secretKey: kdbe
+  AUTH_EXPIRY: 1200000L #20min
+  REFRESH_EXPIRY: 8000000L #6hours
