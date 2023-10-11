@@ -35,7 +35,4 @@ public class Credential extends BaseEntity {
     }
 
 
-
-
-
 }
