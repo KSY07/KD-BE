@@ -38,7 +38,8 @@ public class Space extends BaseEntity{
     private List<RoleSpace> roleSpaces = new ArrayList<>();
 
     @Builder
-    public Space(String spaceId, String name){
+    public Space(Long id, String spaceId, String name){
+        this.id = id;
         this.spaceId = spaceId;
         this.name = name;
     }
