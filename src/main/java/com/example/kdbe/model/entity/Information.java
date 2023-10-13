@@ -30,7 +30,8 @@ public class Information extends BaseEntity{
     private Space space;
 
     @Builder
-    private Information(String title, String content, Space space){
+    private Information(Long id, String title, String content, Space space){
+        this.id = id;
         this.title = title;
         this.content = content;
         if(space != null){

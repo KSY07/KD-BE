@@ -52,6 +52,7 @@ public class ResultData {
         this.timeStamp = new Date();
     }
 
+
     public static ResponseEntity<ResultData> ok(Object data){
         ResultData resultData = new ResultData(data);
         return ResponseEntity.ok(resultData);
@@ -74,5 +75,9 @@ public class ResultData {
 
     public static ResponseEntity<ResultData> ok(ResultData resultData){
         return ResponseEntity.ok(resultData);
+    }
+
+    public static ResponseEntity<ResultData> delete(){
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,21 +1,25 @@
 package com.example.kdbe.web;
 
 
+import com.example.kdbe.model.dto.request.UserRequestDto;
+import com.example.kdbe.model.entity.User;
+import com.example.kdbe.service.UserService;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 @RequestMapping("user")
-public class UserController {
+@RequiredArgsConstructor
+public class UserController implements BaseController<User,UserRequestDto> {
 
-    @GetMapping("/test")
-    public String test(){
-        log.debug("pull request test test");
-        return "hello test";
-    }
+    @Getter
+    private final UserService service;
+
+
 }
