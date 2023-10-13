@@ -1,6 +1,6 @@
 package com.example.kdbe.auth;
 
-import com.example.kdbe.Repository.UserRepository;
+import com.example.kdbe.repository.UserRepository;
 import com.example.kdbe.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
