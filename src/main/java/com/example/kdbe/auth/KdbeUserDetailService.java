@@ -15,7 +15,7 @@ public class KdbeUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findUserByName(username)
+        User user = userRepository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found >> " + username));
 
         KdbeUserDetail kdbeUserDetail = new KdbeUserDetail();
