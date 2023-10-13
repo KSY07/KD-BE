@@ -43,7 +43,8 @@ public class User extends BaseEntity {
     private List<UserSpace> userSpaces = new ArrayList<>();
 
     @Builder
-    public User(String userId, String name, String email, Credential credential, Role role){
+    public User(Long id,String userId, String name, String email, Credential credential, Role role){
+        this.id = id;
         this.userId = userId;
         this.name = name;
         this.email = email;
