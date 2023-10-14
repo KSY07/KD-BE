@@ -30,7 +30,7 @@ public class WebSecurityConfig {
     private final AuthEntryPoint authEntryPoint;
 
     @Bean
-    public AuthFilter authFilter() { return new AuthFilter(); }
+    public AuthFilter KdbeAuthFilter() { return new AuthFilter(); }
 
     @Bean
     public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
@@ -86,7 +86,7 @@ public class WebSecurityConfig {
         //TODO: Add CustomFilters
         //      ex) http.addFilterBefore()
 
-        http.addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(KdbeAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
