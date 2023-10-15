@@ -1,5 +1,7 @@
 package com.example.kdbe.service.impl;
 
+import com.example.kdbe.auth.KdbeUserDetail;
+import com.example.kdbe.auth.KdbeUserDetailService;
 import com.example.kdbe.model.dto.request.SignInRequestDto;
 import com.example.kdbe.model.dto.response.SignInResponseDto;
 import com.example.kdbe.model.entity.RefreshToken;
@@ -14,6 +16,8 @@ import com.example.kdbe.service.UserService;
 import com.example.kdbe.utils.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,32 +44,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SignInResponseDto signIn(SignInRequestDto req) {
-        User u = null;
+    public SignInResponseDto signIn(SignInRequestDto req, KdbeUserDetail userDetail) {
         SignInResponseDto res = new SignInResponseDto();
-        try
-        {
-            u = userRepository.findByUserId(req.getUserId())
-                    .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
-        }
-        catch(UsernameNotFoundException e)
-        {
-            log.error(e.getMessage());
-            return null;
-        }
 
-        boolean isValidate = authUtils.validateCredential(u.getCredential(), req.getPassword());
+        //TODO: Set Authentication to SecurityContextHolder & Generate AuthToken, RefToken
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetail, req.getPassword(), userDetail.getAuthorities()
+        );
 
-        if(isValidate)
-        {
-            //TODO: Update Security Context Holder
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String authToken = authUtils.generateAuthToken(authentication);
 
+        //TODO: Set SignInResponse
+        res.setAuthToken(authToken);
 
-            //TODO: Generate AuthToken & RefToken >> Put SignInResponseDto
-
-        }
-
-        return null;
+        return res;
     }
 
     @Override
