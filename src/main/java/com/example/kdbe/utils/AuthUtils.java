@@ -129,5 +129,15 @@ public class AuthUtils {
 
         return userId;
     }
+
+    /**
+     * 패스워드 인코딩(BCryptEncoder)
+     * @param password
+     * @return Encoded Password
+     */
+    public String encodePassword(String password)
+    {
+        return passwordEncoder.encode(password);
+    }
 }
 
