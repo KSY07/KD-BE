@@ -2,15 +2,19 @@ package com.example.kdbe.service.impl;
 
 import com.example.kdbe.auth.KdbeUserDetail;
 import com.example.kdbe.auth.KdbeUserDetailService;
+import com.example.kdbe.exception.RoleNotFoundException;
 import com.example.kdbe.model.dto.request.SignInRequestDto;
+import com.example.kdbe.model.dto.request.SignUpRequestDto;
 import com.example.kdbe.model.dto.response.SignInResponseDto;
 import com.example.kdbe.model.entity.RefreshToken;
+import com.example.kdbe.model.entity.Role;
 import com.example.kdbe.model.mapStruct.StructMapper;
 import com.example.kdbe.model.mapStruct.UserMapper;
 import com.example.kdbe.model.dto.request.UserRequestDto;
 import com.example.kdbe.model.entity.User;
 import com.example.kdbe.repository.BaseRepository;
 import com.example.kdbe.repository.RefreshTokenRepository;
+import com.example.kdbe.repository.RoleRepository;
 import com.example.kdbe.repository.UserRepository;
 import com.example.kdbe.service.UserService;
 import com.example.kdbe.utils.AuthUtils;
@@ -32,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper             userMapper;
     private final AuthUtils              authUtils;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final RoleRepository         roleRepository;
 
     @Override
     public BaseRepository<User> getRepository() {
@@ -43,6 +48,14 @@ public class UserServiceImpl implements UserService {
         return userMapper;
     }
 
+    /**
+     * 로그인
+     * @author 김세영
+     * @since 2023-10-15
+     * @param req SignInRequestDto
+     * @param userDetail 컨트롤러에서 던져주는 UserDetail
+     * @return SignInResponseDto (AuthToken, RefToken)
+     */
     @Override
     public SignInResponseDto signIn(SignInRequestDto req, KdbeUserDetail userDetail) {
         SignInResponseDto res = new SignInResponseDto();
@@ -59,6 +72,40 @@ public class UserServiceImpl implements UserService {
         res.setAuthToken(authToken);
 
         return res;
+    }
+
+    /**
+     * 회원가입
+     * @author 김세영
+     * @since 2023-10-15
+     * @param req SignUpRequestDto
+     * @return true or false
+     */
+    @Override
+    public boolean signUp(SignUpRequestDto req) {
+
+        //Validation
+        if(userRepository.existsByUserId(req.getUserId())) return false;
+        if(userRepository.existsByEmail(req.getEmail())) return false;
+
+        Role r = null;
+        try {
+            r = roleRepository.findRoleByRoleId(req.getRole())
+                    .orElseThrow(() -> new RoleNotFoundException("Role Not Found"));
+        } catch (RoleNotFoundException e) {
+            return false;
+        }
+
+        User newUser = User.builder()
+                .userId(req.getUserId())
+                .password(authUtils.encodePassword(req.getPassword()))
+                .email(req.getEmail())
+                .role(r)
+                .build();
+
+        userRepository.save(newUser);
+
+        return true;
     }
 
     @Override
