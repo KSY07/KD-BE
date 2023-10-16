@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"hash","salt"})
+@Deprecated
 public class Credential extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE,
