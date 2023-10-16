@@ -19,11 +19,19 @@ public class AppConfig {
 
     private final RedisProperties redisProperties;
 
+    private static final String     HOST = "54.180.24.185";
+    private static final int        PORT = 6379;
+    private static final String     PASSWORD = "rlatpdud13795";
+    private static final String     USERNAME = "default";
+
+
     //Lettuce
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisProperties.getHost(), redisProperties.getPort());
-        redisStandaloneConfiguration.setPassword(redisProperties.getPassword());
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(HOST, PORT);
+        redisStandaloneConfiguration.setUsername(USERNAME);
+        redisStandaloneConfiguration.setPassword(PASSWORD);
+
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
